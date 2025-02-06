@@ -38,7 +38,6 @@ namespace Restaurant
                 searchCustomers(searchText);
             }
         }
-
         private void searchCustomers(string searchText)
         {
             List<customerList> filteredList = new List<customerList>();
@@ -46,11 +45,11 @@ namespace Restaurant
             using (SqlConnection connect = new SqlConnection(connection))
             {
                 connect.Open();
-                string query = "SELECT * FROM orders WHERE customerId LIKE @searchText OR id LIKE @searchText";
+                string query = "SELECT * FROM orders WHERE customerId LIKE @searchText OR id LIKE @searchText OR staff LIKE @searchText";
 
                 using (SqlCommand cmd = new SqlCommand(query, connect))
                 {
-                    cmd.Parameters.AddWithValue("@searchText", "%" + searchText + "%");
+                    cmd.Parameters.AddWithValue("@searchText", "%" + searchText + "%"); // Supports partial matches
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -63,12 +62,82 @@ namespace Restaurant
                         cData.prices = reader["prices"].ToString();
                         cData.totalPrices = reader["total"].ToString();
                         cData.dateOrder = ((DateTime)reader["date_order"]).ToString("dd-MM-yyyy");
+                        cData.staff = reader["staff"].ToString(); // Fetch staff name
 
                         filteredList.Add(cData);
                     }
                 }
             }
+            // Update DataGridView with filtered results
             dataGridView1.DataSource = filteredList;
+        }
+
+        private void dateTimePickerCustomer_ValueChanged(object sender, EventArgs e)
+        {
+
+            DateTime selectedDate = dateTimePickerCustomer.Value;
+            string selectedDateString = selectedDate.ToString("yyyy-MM-dd");
+
+            // Modify the query based on the selected date (Day, Month, or Year)
+            List<customerList> filteredList = new List<customerList>();
+
+            using (SqlConnection connect = new SqlConnection(connection))
+            {
+                connect.Open();
+
+                // Check whether the user has selected a specific day, month, or year
+                string query = string.Empty;
+
+                if (dateTimePickerCustomer.CustomFormat == "yyyy") // Year selected
+                {
+                    query = "SELECT * FROM orders WHERE YEAR(date_order) = @year";
+                }
+                else if (dateTimePickerCustomer.CustomFormat == "MM/yyyy") // Month selected
+                {
+                    query = "SELECT * FROM orders WHERE MONTH(date_order) = @month AND YEAR(date_order) = @year";
+                }
+                else // Day selected
+                {
+                    query = "SELECT * FROM orders WHERE date_order = @date";
+                }
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.AddWithValue("@date", selectedDateString);
+                    cmd.Parameters.AddWithValue("@year", selectedDate.Year);
+                    cmd.Parameters.AddWithValue("@month", selectedDate.Month);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        customerList cData = new customerList();
+                        cData.id = (int)reader["id"];
+                        cData.customerId = reader["customerId"].ToString();
+                        cData.productsIds = reader["productids"].ToString();
+                        cData.quantities = reader["quantities"].ToString();
+                        cData.prices = reader["prices"].ToString();
+                        cData.totalPrices = reader["total"].ToString();
+                        cData.dateOrder = ((DateTime)reader["date_order"]).ToString("dd-MM-yyyy");
+                        cData.staff = reader["staff"].ToString(); // Fetch staff name
+
+                        filteredList.Add(cData);
+                    }
+                }
+            }
+
+            // Update the DataGridView with filtered results
+            dataGridView1.DataSource = filteredList;
+        }
+
+        private void pictureBoxReload_Click(object sender, EventArgs e)
+        {
+            // Reload or refresh the UserControl data
+            displayCustomers(); // This method reloads the customer data
+
+            // Optionally, you can reset other UI components as needed (e.g., clear search text, reset filters)
+            textSearch.Clear();
+            dateTimePickerCustomer.ResetText(); // Reset the DateTimePicker
         }
     }
 }

@@ -23,6 +23,18 @@ namespace Restaurant
             displayTotalMoney();
             displayTodaySales();
             displayWeeklySales(); // Add the method to display weekly sales chart
+
+            ReloadForm(); // Call this to display data when the form is loaded
+        }
+
+        public void ReloadForm()
+        {
+            displayTotalUsers();
+            displayTotalProducts();
+            displayTotalToday();
+            displayTotalMoney();
+            displayTodaySales();
+            displayWeeklySales(); // Reload weekly sales chart
         }
         public void displayWeeklySales()
         {
@@ -66,45 +78,26 @@ namespace Restaurant
             {
                 connect.Open();
 
-                // Get sales for the last 7 days
-                for (int i = 6; i >= 0; i--) // Start from last Sunday to today (Saturday)
+                for (int i = 6; i >= 0; i--) // Start from 6 days ago to today
                 {
-                    string selectData = "SELECT SUM(CAST(total as DECIMAL(10,2))) FROM orders WHERE date_order = @date";
+                    string selectData = "SELECT SUM(CAST(total AS DECIMAL(10,2))) FROM orders WHERE CAST(date_order AS DATE) = @date";
 
                     using (SqlCommand cmd = new SqlCommand(selectData, connect))
                     {
-                        DateTime targetDate = DateTime.Today.AddDays(-6 + i); // Adjust to ensure correct ordering
-                        string getDate = targetDate.ToString("yyyy-MM-dd");
+                        DateTime targetDate = DateTime.Today.AddDays(-i); // Oldest first
+                        cmd.Parameters.Add("@date", SqlDbType.Date).Value = targetDate; // Use Date type
 
-                        cmd.Parameters.AddWithValue("@date", getDate);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                if (reader[0] != DBNull.Value)
-                                {
-                                    decimal dailySales = Convert.ToDecimal(reader[0]);
-                                    sales.Add(dailySales);
-                                }
-                                else
-                                {
-                                    sales.Add(0); // No sales for that day
-                                }
-                            }
-                        }
+                        object result = cmd.ExecuteScalar();
+                        sales.Add(result != DBNull.Value ? Convert.ToDecimal(result) : 0);
                     }
                 }
             }
-            return sales;
+            return sales; // No need to reverse, already ordered correctly
         }
-
         private string GetDayName(int index)
         {
-            // Convert index to day name
-            //DateTime day = DateTime.Now.AddDays(-dayIndex);
-            //return day.ToString("ddd"); // Example: Mon, Tue, etc.
-            return DateTime.Today.AddDays(-6 + index).ToString("dddd"); // Correctly maps days from Sunday to Saturday
+            DateTime targetDate = DateTime.Today.AddDays(-6 + index); // Align with loop order
+            return targetDate.ToString("dddd"); // Returns full day name
         }
 
         public void displayTodaySales()
@@ -203,6 +196,11 @@ namespace Restaurant
                     }
                 }
             }
+        }
+
+        private void pictureBoxReload_Click(object sender, EventArgs e)
+        {
+            ReloadForm();
         }
     }
 }

@@ -47,14 +47,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 118);
+            this.panel1.Size = new System.Drawing.Size(246, 199);
             this.panel1.TabIndex = 0;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 146);
+            this.pictureBox1.Size = new System.Drawing.Size(249, 199);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -63,7 +63,7 @@
             // 
             this.productname.AutoSize = true;
             this.productname.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productname.Location = new System.Drawing.Point(4, 149);
+            this.productname.Location = new System.Drawing.Point(4, 201);
             this.productname.Name = "productname";
             this.productname.Size = new System.Drawing.Size(116, 19);
             this.productname.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             this.price.AutoSize = true;
             this.price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.Location = new System.Drawing.Point(4, 176);
+            this.price.Location = new System.Drawing.Point(5, 223);
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(44, 18);
             this.price.TabIndex = 2;
@@ -82,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 203);
+            this.label3.Location = new System.Drawing.Point(5, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 16);
             this.label3.TabIndex = 3;
@@ -92,7 +92,7 @@
             // 
             this.stock.AutoSize = true;
             this.stock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stock.Location = new System.Drawing.Point(58, 203);
+            this.stock.Location = new System.Drawing.Point(68, 243);
             this.stock.Name = "stock";
             this.stock.Size = new System.Drawing.Size(16, 18);
             this.stock.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             // quantity
             // 
-            this.quantity.Location = new System.Drawing.Point(65, 229);
+            this.quantity.Location = new System.Drawing.Point(66, 267);
             this.quantity.Name = "quantity";
             this.quantity.Size = new System.Drawing.Size(64, 22);
             this.quantity.TabIndex = 5;
@@ -114,7 +114,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(135, 222);
+            this.btnAdd.Location = new System.Drawing.Point(182, 261);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(64, 29);
             this.btnAdd.TabIndex = 6;
@@ -125,7 +125,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 232);
+            this.label5.Location = new System.Drawing.Point(5, 270);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 16);
             this.label5.TabIndex = 7;
@@ -146,7 +146,7 @@
             this.Controls.Add(this.productname);
             this.Controls.Add(this.panel1);
             this.Name = "cardProducts";
-            this.Size = new System.Drawing.Size(200, 253);
+            this.Size = new System.Drawing.Size(246, 292);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

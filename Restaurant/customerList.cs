@@ -17,6 +17,7 @@ namespace Restaurant
         public string prices { get; set; }
         public string totalPrices { get; set; }
         public string dateOrder { get; set; }
+        public string staff { get; set; }
 
        public List<customerList> customerListData()
         {
@@ -43,6 +44,7 @@ namespace Restaurant
                         cData.prices = reader["prices"].ToString();
                         cData.totalPrices = reader["total"].ToString();
                         cData.dateOrder = ((DateTime)reader["date_order"]).ToString("dd-MM-yyyy");
+                        cData.staff = reader["staff"].ToString();
 
                         listData.Add(cData);
                     }
@@ -81,6 +83,7 @@ namespace Restaurant
                         cData.prices = reader["prices"].ToString();
                         cData.totalPrices = reader["total"].ToString();
                         cData.dateOrder = ((DateTime)reader["date_order"]).ToString("dd-MM-yyyy");
+                        cData.staff = reader["staff"].ToString();
 
                         listData.Add(cData);
                     }

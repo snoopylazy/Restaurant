@@ -50,7 +50,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 35);
+            this.panel1.Size = new System.Drawing.Size(399, 35);
             this.panel1.TabIndex = 0;
             // 
             // Close
@@ -62,7 +62,7 @@
             this.Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Close.ForeColor = System.Drawing.Color.White;
-            this.Close.Location = new System.Drawing.Point(295, 4);
+            this.Close.Location = new System.Drawing.Point(351, 4);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(45, 29);
             this.Close.TabIndex = 0;
@@ -75,7 +75,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Snap ITC", 12F);
             this.label1.ForeColor = System.Drawing.Color.Sienna;
-            this.label1.Location = new System.Drawing.Point(71, 201);
+            this.label1.Location = new System.Drawing.Point(98, 223);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 27);
             this.label1.TabIndex = 2;
@@ -84,17 +84,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Sienna;
-            this.label2.Location = new System.Drawing.Point(24, 253);
+            this.label2.Location = new System.Drawing.Point(51, 275);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 16);
+            this.label2.Size = new System.Drawing.Size(78, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Username";
             // 
             // txtusername
             // 
             this.txtusername.Font = new System.Drawing.Font("Snap ITC", 12F);
-            this.txtusername.Location = new System.Drawing.Point(26, 272);
+            this.txtusername.Location = new System.Drawing.Point(53, 294);
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(295, 33);
             this.txtusername.TabIndex = 4;
@@ -102,7 +103,7 @@
             // txtpassword
             // 
             this.txtpassword.Font = new System.Drawing.Font("Snap ITC", 12F);
-            this.txtpassword.Location = new System.Drawing.Point(27, 347);
+            this.txtpassword.Location = new System.Drawing.Point(54, 369);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '*';
             this.txtpassword.Size = new System.Drawing.Size(295, 33);
@@ -111,10 +112,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Sienna;
-            this.label3.Location = new System.Drawing.Point(25, 328);
+            this.label3.Location = new System.Drawing.Point(52, 350);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 16);
+            this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Password";
             // 
@@ -122,7 +124,7 @@
             // 
             this.showpass.AutoSize = true;
             this.showpass.ForeColor = System.Drawing.Color.Sienna;
-            this.showpass.Location = new System.Drawing.Point(27, 387);
+            this.showpass.Location = new System.Drawing.Point(54, 409);
             this.showpass.Name = "showpass";
             this.showpass.Size = new System.Drawing.Size(124, 20);
             this.showpass.TabIndex = 7;
@@ -134,10 +136,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Sienna;
-            this.label4.Location = new System.Drawing.Point(64, 500);
+            this.label4.Location = new System.Drawing.Point(67, 512);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(223, 16);
+            this.label4.Size = new System.Drawing.Size(258, 16);
             this.label4.TabIndex = 9;
             this.label4.Text = "Not yet have account? Register here";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -145,7 +148,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Restaurant.Properties.Resources.User;
-            this.pictureBox1.Location = new System.Drawing.Point(120, 88);
+            this.pictureBox1.Location = new System.Drawing.Point(147, 110);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -161,7 +164,7 @@
             this.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login.ForeColor = System.Drawing.Color.White;
-            this.login.Location = new System.Drawing.Point(26, 445);
+            this.login.Location = new System.Drawing.Point(53, 467);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(295, 42);
             this.login.TabIndex = 19;
@@ -173,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 621);
+            this.ClientSize = new System.Drawing.Size(399, 621);
             this.Controls.Add(this.login);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.showpass);

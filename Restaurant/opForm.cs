@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.Runtime.InteropServices;
+
+
 //using static System.Net.Mime.MediaTypeNames;
 
 namespace Restaurant
@@ -100,6 +105,7 @@ namespace Restaurant
                 }
 
                 updateTotalprice(); // Update total price after changes
+
             };
         }
         private void updateTotalprice()
@@ -186,26 +192,25 @@ namespace Restaurant
             {
                 if (MessageBox.Show("Are you sure you want to process?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                   using(SqlConnection connect = new SqlConnection(connection))
+                    using (SqlConnection connect = new SqlConnection(connection))
                     {
                         connect.Open();
 
                         string countData = "SELECT COUNT(*) FROM orders";
-
                         int count = 1;
 
                         using (SqlCommand cData = new SqlCommand(countData, connect))
                         {
-                           count = Convert.ToInt32(cData.ExecuteScalar()) + 1;
+                            count = Convert.ToInt32(cData.ExecuteScalar()) + 1;
                         }
 
                         List<string> productIds = new List<string>();
                         List<string> quantities = new List<string>();
                         List<string> prices = new List<string>();
 
-                        foreach(DataGridViewRow row in dataGridView1.Rows)
+                        foreach (DataGridViewRow row in dataGridView1.Rows)
                         {
-                            if (row.Cells["id"].Value != null && row.Cells["QTY"] !=null && row.Cells["price"] != null)
+                            if (row.Cells["id"].Value != null && row.Cells["QTY"] != null && row.Cells["price"] != null)
                             {
                                 productIds.Add(row.Cells["id"].Value.ToString());
                                 quantities.Add(row.Cells["QTY"].Value.ToString());
@@ -219,7 +224,8 @@ namespace Restaurant
 
                         decimal totalAmount = Convert.ToDecimal(total.Text.Replace("$", ""));
 
-                        string insertData = "INSERT INTO orders (customerId, productids, quantities, prices, total, date_order) VALUES (@cid, @pid, @qty, @price, @total, @date)";
+                        // **Modify query to include 'staff' column**
+                        string insertData = "INSERT INTO orders (customerId, productids, quantities, prices, total, date_order, staff) VALUES (@cid, @pid, @qty, @price, @total, @date, @staff)";
 
                         using (SqlCommand cmd = new SqlCommand(insertData, connect))
                         {
@@ -228,10 +234,10 @@ namespace Restaurant
                             cmd.Parameters.AddWithValue("@qty", quantitiesStr);
                             cmd.Parameters.AddWithValue("@price", pricesStr);
                             cmd.Parameters.AddWithValue("@total", totalAmount);
+                            cmd.Parameters.AddWithValue("@date", DateTime.Now);
 
-                            DateTime today = DateTime.Now;
-
-                            cmd.Parameters.AddWithValue("@date", today);
+                            // **Store the logged-in user's name in the 'staff' column**
+                            cmd.Parameters.AddWithValue("@staff", UserSession.LoggedInUser);
 
                             int rowAffected = cmd.ExecuteNonQuery();
 
@@ -253,11 +259,11 @@ namespace Restaurant
                                         }
                                     }
 
-                                    int newStock = currentStock - Convert.ToInt32(quantities[q]); 
+                                    int newStock = currentStock - Convert.ToInt32(quantities[q]);
 
-                                    if(newStock < 0)
+                                    if (newStock < 0)
                                     {
-                                        MessageBox.Show($"Indufficient Stock for product ID : {productIds[q]}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show($"Insufficient Stock for product ID: {productIds[q]}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
 
@@ -330,80 +336,99 @@ namespace Restaurant
         {
             rowIndex = 0;
         }
-
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            float y = 0;
-            int count = 0;
+            // Define page dimensions and margins
+            float pageWidth = e.MarginBounds.Width;
+            float pageHeight = e.MarginBounds.Height;
+            float y = e.MarginBounds.Top;
+            int padding = 5;
             int colWidth = 120;
-            int headMargin = 10;
-            int tableMargin = 20;
+            int colCount = 4;
+            int tableWidth = colWidth * colCount; // Total width of table
+            float tableStartX = e.MarginBounds.Left + (pageWidth - tableWidth) / 2; // Center table
 
+            // Define fonts and brushes
             Font font = new Font("Arial", 12);
             Font bold = new Font("Arial", 12, FontStyle.Bold);
-            Font headerFont = new Font("Arial", 16, FontStyle.Bold);
+            Font headerFont = new Font("Arial", 18, FontStyle.Bold);
             Font labelFont = new Font("Arial", 14, FontStyle.Bold);
 
-            float margin = e.MarginBounds.Top;
+            Brush headerBrush = Brushes.DarkBlue;
+            Brush totalBrush = Brushes.DarkRed;
+            Brush textBrush = Brushes.Black;
+            Brush backgroundBrush = Brushes.LightGray;
 
-            StringFormat alignCenter = new StringFormat();
-            alignCenter.Alignment = StringAlignment.Center;
-            alignCenter.LineAlignment = StringAlignment.Center;
-
-            string headerText = "Receipt";
-            y = (margin + count * headerFont.GetHeight(e.Graphics) + headMargin);
-            e.Graphics.DrawString(headerText, headerFont, Brushes.Black, e.MarginBounds.Left + (dataGridView1.Columns.Count / 2) * colWidth, y, alignCenter);
-
-            count++;
-            y += tableMargin;
-
-            string[] header = { "PID", "ProdName", "QTY", "Price" };
-
-            for(int q =0; q < header.Length; q++)
+            StringFormat alignCenter = new StringFormat
             {
-                y = margin + count * bold.GetHeight(e.Graphics) + tableMargin;
-                e.Graphics.DrawString(header[q], bold, Brushes.Black, e.MarginBounds.Left + (q * colWidth), y, alignCenter);
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            // **Print Receipt Header (Title)**
+            string headerText = "RECEIPT";
+            float headerX = e.MarginBounds.Left + (pageWidth / 2) - (e.Graphics.MeasureString(headerText, headerFont).Width / 2);
+            e.Graphics.DrawString(headerText, headerFont, headerBrush, headerX, y);
+            y += headerFont.GetHeight(e.Graphics) + 20;
+
+            // **Draw Table Headers with Background**
+            string[] headers = { "PID", "ProdName", "QTY", "Price" };
+            float x = tableStartX;
+
+            for (int q = 0; q < colCount; q++)
+            {
+                RectangleF headerRect = new RectangleF(x + (q * colWidth), y, colWidth, bold.GetHeight(e.Graphics) + padding);
+                e.Graphics.FillRectangle(backgroundBrush, headerRect);
+                e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(headerRect));
+                e.Graphics.DrawString(headers[q], bold, textBrush, headerRect, alignCenter);
             }
-            count++;
+            y += bold.GetHeight(e.Graphics) + padding;
 
-            float rSpace = e.MarginBounds.Bottom - y;
-
+            // **Print Rows**
+            int rowIndex = 0;
             while (rowIndex < dataGridView1.Rows.Count)
             {
                 DataGridViewRow row = dataGridView1.Rows[rowIndex];
-                for(int q = 0; q < dataGridView1.Columns.Count; q++)
+                x = tableStartX;
+
+                for (int q = 0; q < colCount; q++)
                 {
                     object cellValue = row.Cells[q].Value;
                     string cell = (cellValue != null) ? cellValue.ToString() : string.Empty;
-                    y = margin + count * font.GetHeight(e.Graphics) + tableMargin;
-                    e.Graphics.DrawString(cell, font, Brushes.Black, e.MarginBounds.Left + q * colWidth, y, alignCenter);
+
+                    RectangleF cellRect = new RectangleF(x + (q * colWidth), y, colWidth, font.GetHeight(e.Graphics) + padding);
+                    e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(cellRect));
+                    e.Graphics.DrawString(cell, font, textBrush, cellRect, alignCenter);
                 }
-                count++;
+                y += font.GetHeight(e.Graphics) + padding;
                 rowIndex++;
 
-                if(y + font.GetHeight(e.Graphics) > e.MarginBounds.Bottom)
+                if (y + font.GetHeight(e.Graphics) > e.MarginBounds.Bottom - 150)
                 {
                     e.HasMorePages = true;
                     return;
                 }
             }
 
-            int labelMargin = (int)Math.Min(rSpace, 200);
+            // Space before totals
+            y += 40;
 
-            DateTime today = DateTime.Now;
+            // **Total, Amount, Change, and Cashier Info**
+            float labelX = e.MarginBounds.Left + (pageWidth - 200); // Adjusted to make space for the text
+            string totalText = $"Total Price: {total.Text.Trim()}\nAmount: {amount.Text.Trim()}\nChange: {change.Text.Trim()}";
+            e.Graphics.DrawString(totalText, labelFont, totalBrush, labelX, y);
 
-            float labelX = e.MarginBounds.Right - e.Graphics.MeasureString("------------------", labelFont).Width;
-            y = e.MarginBounds.Bottom - labelMargin - labelFont.GetHeight(e.Graphics);
+            // **Print Cashier Name near Total**
+            y += labelFont.GetHeight(e.Graphics) + 50;
+            string cashierName = "Cashier: " + UserSession.LoggedInUser;
+            e.Graphics.DrawString(cashierName, labelFont, textBrush, labelX, y);
 
-            e.Graphics.DrawString($"Total Price: \t{total.Text.Trim()}\nAmount:\t{change.Text.Trim()}\n\t\t------------------\nChange:\t{amount.Text.Trim()}", labelFont, Brushes.Black, labelX, y);
-
-            labelMargin = (int)Math.Min(rSpace, -40);
-
-            string labelText = today.ToString();
-
-            y = e.MarginBounds.Bottom - labelMargin - labelFont.GetHeight(e.Graphics);
-            e.Graphics.DrawString(labelText, labelFont, Brushes.Black, e.MarginBounds.Right - e.Graphics.MeasureString("------------------", labelFont).Width, y);
+            // **Print Date**
+            y += labelFont.GetHeight(e.Graphics) + 50;
+            string dateText = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); // Formatting date
+            e.Graphics.DrawString(dateText, labelFont, textBrush, labelX, y);
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             // Check if a row is selected in the DataGridView
@@ -452,5 +477,21 @@ namespace Restaurant
             // Reload the products with the search term
             loadProducts(searchTerm);
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to clear the order?", "Confirm Clear", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                dataGridView1.Rows.Clear();
+                total.Text = "$0.00";
+                change.Text = "";
+                amount.Text = "$0.00";
+            }
+        }
+
+        //private void btnDiscount_Click(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

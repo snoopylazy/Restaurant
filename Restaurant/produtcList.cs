@@ -10,7 +10,7 @@ namespace Restaurant
     internal class produtcList
     {
         string connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\USER\Documents\restaurantsystem.mdf;Integrated Security=True;Connect Timeout=30";
-
+        
         public int ID { get; set; }
         public string ProductID { get; set; }
         public string ProductName { get; set; }

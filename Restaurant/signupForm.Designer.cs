@@ -52,7 +52,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(325, 35);
+            this.panel1.Size = new System.Drawing.Size(399, 35);
             this.panel1.TabIndex = 10;
             // 
             // Close
@@ -64,7 +64,7 @@
             this.Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Close.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Close.ForeColor = System.Drawing.Color.White;
-            this.Close.Location = new System.Drawing.Point(280, 3);
+            this.Close.Location = new System.Drawing.Point(351, 3);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(45, 29);
             this.Close.TabIndex = 0;
@@ -76,10 +76,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Sienna;
-            this.label4.Location = new System.Drawing.Point(56, 530);
+            this.label4.Location = new System.Drawing.Point(65, 544);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(228, 16);
+            this.label4.Size = new System.Drawing.Size(263, 16);
             this.label4.TabIndex = 19;
             this.label4.Text = "Already have an account? LogIn here";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -93,7 +94,7 @@
             this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegister.ForeColor = System.Drawing.Color.White;
-            this.btnRegister.Location = new System.Drawing.Point(18, 476);
+            this.btnRegister.Location = new System.Drawing.Point(52, 499);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(295, 42);
             this.btnRegister.TabIndex = 18;
@@ -105,7 +106,7 @@
             // 
             this.showpass.AutoSize = true;
             this.showpass.ForeColor = System.Drawing.Color.Sienna;
-            this.showpass.Location = new System.Drawing.Point(18, 428);
+            this.showpass.Location = new System.Drawing.Point(52, 451);
             this.showpass.Name = "showpass";
             this.showpass.Size = new System.Drawing.Size(124, 20);
             this.showpass.TabIndex = 17;
@@ -116,7 +117,7 @@
             // txtpassword
             // 
             this.txtpassword.Font = new System.Drawing.Font("Snap ITC", 12F);
-            this.txtpassword.Location = new System.Drawing.Point(18, 312);
+            this.txtpassword.Location = new System.Drawing.Point(52, 335);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '*';
             this.txtpassword.Size = new System.Drawing.Size(295, 33);
@@ -125,17 +126,18 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Sienna;
-            this.label3.Location = new System.Drawing.Point(16, 293);
+            this.label3.Location = new System.Drawing.Point(50, 316);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 16);
+            this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 15;
             this.label3.Text = "Password";
             // 
             // txtusername
             // 
             this.txtusername.Font = new System.Drawing.Font("Snap ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtusername.Location = new System.Drawing.Point(18, 233);
+            this.txtusername.Location = new System.Drawing.Point(52, 256);
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(295, 33);
             this.txtusername.TabIndex = 14;
@@ -143,10 +145,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Sienna;
-            this.label2.Location = new System.Drawing.Point(16, 214);
+            this.label2.Location = new System.Drawing.Point(50, 237);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 16);
+            this.label2.Size = new System.Drawing.Size(78, 16);
             this.label2.TabIndex = 13;
             this.label2.Text = "Username";
             // 
@@ -155,7 +158,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Snap ITC", 12F);
             this.label1.ForeColor = System.Drawing.Color.Sienna;
-            this.label1.Location = new System.Drawing.Point(63, 161);
+            this.label1.Location = new System.Drawing.Point(97, 184);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(221, 27);
             this.label1.TabIndex = 12;
@@ -164,7 +167,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Restaurant.Properties.Resources.User;
-            this.pictureBox1.Location = new System.Drawing.Point(112, 49);
+            this.pictureBox1.Location = new System.Drawing.Point(146, 72);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -174,7 +177,7 @@
             // txtconfirmpass
             // 
             this.txtconfirmpass.Font = new System.Drawing.Font("Snap ITC", 12F);
-            this.txtconfirmpass.Location = new System.Drawing.Point(18, 388);
+            this.txtconfirmpass.Location = new System.Drawing.Point(52, 411);
             this.txtconfirmpass.Name = "txtconfirmpass";
             this.txtconfirmpass.PasswordChar = '*';
             this.txtconfirmpass.Size = new System.Drawing.Size(295, 33);
@@ -183,10 +186,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Sienna;
-            this.label5.Location = new System.Drawing.Point(16, 369);
+            this.label5.Location = new System.Drawing.Point(50, 392);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 16);
+            this.label5.Size = new System.Drawing.Size(131, 16);
             this.label5.TabIndex = 20;
             this.label5.Text = "Confirm Password";
             // 
@@ -194,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 574);
+            this.ClientSize = new System.Drawing.Size(399, 621);
             this.Controls.Add(this.txtconfirmpass);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);

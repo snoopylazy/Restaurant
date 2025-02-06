@@ -158,5 +158,10 @@ namespace Restaurant
         {
 
         }
+
+        //private void pictureBoxReload_Click(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

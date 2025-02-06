@@ -69,7 +69,6 @@ namespace Restaurant
         {
             txtpassword.PasswordChar = showpass.Checked ? '\0' : '*';
         }
-
         private void login_Click(object sender, EventArgs e)
         {
             using (SqlConnection connect = new SqlConnection(connection))
@@ -88,22 +87,19 @@ namespace Restaurant
 
                     if (table.Rows.Count > 0)
                     {
-                        var username = table.Rows[0]["username"].ToString();
-                        var password = table.Rows[0]["password"].ToString();
+                        // Get username from the database
+                        string username = table.Rows[0]["username"].ToString();
 
-                        // Check if the user is admin
-                        if (username == "admin" && password == "admin123")
-                        {
-                            var mainForm = new mainForm(true, username); // Pass true to indicate admin login
-                            mainForm.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            var mainForm = new mainForm(false, username); // Pass false to indicate non-admin login
-                            mainForm.Show();
-                            this.Hide();
-                        }
+                        // **Store username in UserSession**
+                        UserSession.LoggedInUser = username;
+
+                        // Check if user is admin
+                        bool isAdmin = (username == "admin");
+
+                        // Open main form and pass login status
+                        var mainForm = new mainForm(isAdmin, username);
+                        mainForm.Show();
+                        this.Hide();
                     }
                     else
                     {
@@ -112,6 +108,7 @@ namespace Restaurant
                 }
             }
         }
+
 
         //private void btnLogin(object sender, EventArgs e)
         //{

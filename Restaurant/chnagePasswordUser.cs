@@ -15,17 +15,18 @@ namespace Restaurant
         public chnagePasswordUser()
         {
             InitializeComponent();
-            LoadUsers(); // Load users on startup
-            dataGridView1.CellClick += DataGridView1_CellClick; // Handle row click
+            LoadUsers();
+            dataGridView1.CellClick += DataGridView1_CellClick;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
         }
 
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Ensure it's not the header row
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 selectedUsername = row.Cells["username"].Value.ToString();
-                txtusername.Text = selectedUsername;
+                textusername.Text = selectedUsername;
             }
         }
 
@@ -59,13 +60,13 @@ namespace Restaurant
                 return;
             }
 
-            //string hashedNewPassword = HashPassword(newPassword);
-            //UpdatePassword(selectedUsername, hashedNewPassword);
-            UpdatePassword(selectedUsername, newPassword);
+            // If the checkbox is checked, hash the password; otherwise, store it as plain text
+            string finalPassword = checkBox1.Checked ? HashPassword(newPassword) : newPassword;
+
+            UpdatePassword(selectedUsername, finalPassword);
 
             MessageBox.Show("Password changed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Clear fields
             txtpassword.Clear();
             txtnewpassword.Clear();
             txtConfirmPass.Clear();
@@ -83,17 +84,17 @@ namespace Restaurant
                 object result = cmd.ExecuteScalar();
                 if (result != null)
                 {
-                    string storedPassword = result.ToString();
-
-                    // Trim spaces to avoid issues
-                    storedPassword = storedPassword.Trim();
-                    enteredPassword = enteredPassword.Trim();
-
-                    return storedPassword == enteredPassword;
+                    string storedPassword = result.ToString().Trim();
+                    // If checkbox is checked, compare hashed passwords
+                    if (checkBox1.Checked)
+                        return storedPassword == HashPassword(enteredPassword);
+                    else
+                        return storedPassword == enteredPassword;
                 }
                 return false;
             }
         }
+
 
         private void UpdatePassword(string username, string newPasswordHash)
         {
@@ -106,8 +107,7 @@ namespace Restaurant
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.ExecuteNonQuery();
             }
-
-            LoadUsers(); // Refresh DataGridView
+            LoadUsers();
         }
 
         private void LoadUsers(string search = "")
@@ -116,15 +116,12 @@ namespace Restaurant
             {
                 conn.Open();
                 string query = "SELECT id, username, password, status, date_created FROM users";
-
                 if (!string.IsNullOrEmpty(search))
                 {
-                    query += " WHERE id LIKE @search OR username LIKE @search";
+                    query += " WHERE username LIKE @search";
                 }
-
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 adapter.SelectCommand.Parameters.AddWithValue("@search", "%" + search + "%");
-
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dataGridView1.DataSource = dt;
@@ -155,6 +152,74 @@ namespace Restaurant
         private void textSearch_TextChanged(object sender, EventArgs e)
         {
             LoadUsers(textSearch.Text.Trim());
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectedUsername))
+            {
+                MessageBox.Show("Please select a user from the list!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"Are you sure you want to delete the user '{selectedUsername}'?",
+                                                  "Confirm Delete",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                using (SqlConnection conn = new SqlConnection(connection))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM users WHERE username = @username";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@username", selectedUsername);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("User deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                selectedUsername = ""; // Clear selection
+                textusername.Clear();   // Clear username field
+                LoadUsers();            // Refresh the user list
+            }
+        }
+
+
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            string username = textusername.Text.Trim();
+            string password = txtnewpassword.Text.Trim();
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Username and password are required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string finalPassword = checkBox1.Checked ? HashPassword(password) : password;
+
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                conn.Open();
+                string query = "INSERT INTO users (username, password, status, date_created) VALUES (@username, @password, 'Active', GETDATE())";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", finalPassword);
+                cmd.ExecuteNonQuery();
+            }
+            MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadUsers();
+        }
+
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = checkBox1.Checked;
+            txtpassword.UseSystemPasswordChar = !isChecked;
+            txtnewpassword.UseSystemPasswordChar = !isChecked;
+            txtConfirmPass.UseSystemPasswordChar = !isChecked;
         }
     }
 }
