@@ -73,62 +73,63 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Snap ITC", 12F);
+            this.label1.Font = new System.Drawing.Font("Khmer OS Battambang", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Sienna;
-            this.label1.Location = new System.Drawing.Point(98, 223);
+            this.label1.Location = new System.Drawing.Point(145, 213);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 27);
+            this.label1.Size = new System.Drawing.Size(102, 31);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Welcome, Back!!";
+            this.label1.Text = "សូមស្វាគមន៍";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F);
             this.label2.ForeColor = System.Drawing.Color.Sienna;
-            this.label2.Location = new System.Drawing.Point(51, 275);
+            this.label2.Location = new System.Drawing.Point(51, 267);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 16);
+            this.label2.Size = new System.Drawing.Size(78, 24);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Username";
+            this.label2.Text = "ឈ្មោះគណនី";
             // 
             // txtusername
             // 
-            this.txtusername.Font = new System.Drawing.Font("Snap ITC", 12F);
+            this.txtusername.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F);
             this.txtusername.Location = new System.Drawing.Point(53, 294);
             this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(295, 33);
+            this.txtusername.Size = new System.Drawing.Size(295, 31);
             this.txtusername.TabIndex = 4;
             // 
             // txtpassword
             // 
-            this.txtpassword.Font = new System.Drawing.Font("Snap ITC", 12F);
+            this.txtpassword.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F);
             this.txtpassword.Location = new System.Drawing.Point(54, 369);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '*';
-            this.txtpassword.Size = new System.Drawing.Size(295, 33);
+            this.txtpassword.Size = new System.Drawing.Size(295, 31);
             this.txtpassword.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F);
             this.label3.ForeColor = System.Drawing.Color.Sienna;
-            this.label3.Location = new System.Drawing.Point(52, 350);
+            this.label3.Location = new System.Drawing.Point(51, 342);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
+            this.label3.Size = new System.Drawing.Size(71, 24);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Password";
+            this.label3.Text = "លេខសម្ងាត់";
             // 
             // showpass
             // 
             this.showpass.AutoSize = true;
+            this.showpass.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F);
             this.showpass.ForeColor = System.Drawing.Color.Sienna;
             this.showpass.Location = new System.Drawing.Point(54, 409);
             this.showpass.Name = "showpass";
-            this.showpass.Size = new System.Drawing.Size(124, 20);
+            this.showpass.Size = new System.Drawing.Size(67, 28);
             this.showpass.TabIndex = 7;
-            this.showpass.Text = "Show password";
+            this.showpass.Text = "បង្ហាញ";
             this.showpass.UseVisualStyleBackColor = true;
             this.showpass.CheckedChanged += new System.EventHandler(this.showpass_CheckedChanged);
             // 
@@ -136,13 +137,13 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Khmer OS Battambang", 7.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Sienna;
-            this.label4.Location = new System.Drawing.Point(67, 512);
+            this.label4.Location = new System.Drawing.Point(128, 513);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(258, 16);
+            this.label4.Size = new System.Drawing.Size(149, 22);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Not yet have account? Register here";
+            this.label4.Text = "មិនទាន់មានគណនី?ចុចទីនេះ";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // pictureBox1
@@ -162,13 +163,13 @@
             this.login.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.login.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login.Font = new System.Drawing.Font("Khmer OS Battambang", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login.ForeColor = System.Drawing.Color.White;
             this.login.Location = new System.Drawing.Point(53, 467);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(295, 42);
             this.login.TabIndex = 19;
-            this.login.Text = "Login";
+            this.login.Text = "ចូលប្រព័ន្ធ";
             this.login.UseVisualStyleBackColor = false;
             this.login.Click += new System.EventHandler(this.login_Click);
             // 

@@ -103,6 +103,16 @@ namespace Restaurant.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Osja_Esports_2022 {
+            get {
+                object obj = ResourceManager.GetObject("Osja_Esports_2022", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_small_restaurant_building_vector_with_flat_design_png_image_2316583 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-small-restaurant-building-vector-with-flat-design-png-image_2316583", resourceCulture);

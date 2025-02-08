@@ -91,5 +91,15 @@ namespace Restaurant
                 }
             }
         }
+
+        //private void txtconfirmpass_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    btnRegister.Focus();
+        //}
+
+        //private void signupForm_KeyDown(object sender, KeyEventArgs e)
+        //{
+
+        //}
     }
 }

@@ -144,6 +144,7 @@ namespace Restaurant
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            textusername.Clear();
             txtpassword.Clear();
             txtnewpassword.Clear();
             txtConfirmPass.Clear();
@@ -184,9 +185,6 @@ namespace Restaurant
                 LoadUsers();            // Refresh the user list
             }
         }
-
-
-
         private void btnCreate_Click(object sender, EventArgs e)
         {
             string username = textusername.Text.Trim();
@@ -198,28 +196,46 @@ namespace Restaurant
                 return;
             }
 
-            string finalPassword = checkBox1.Checked ? HashPassword(password) : password;
-
             using (SqlConnection conn = new SqlConnection(connection))
             {
                 conn.Open();
+
+                // Check if the username already exists
+                string checkQuery = "SELECT COUNT(*) FROM users WHERE username = @username";
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                checkCmd.Parameters.AddWithValue("@username", username);
+                int userExists = (int)checkCmd.ExecuteScalar();
+
+                if (userExists > 0)
+                {
+                    MessageBox.Show("This username is already taken. Please choose another one!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Insert the new user
+                string finalPassword = checkBox1.Checked ? HashPassword(password) : password;
                 string query = "INSERT INTO users (username, password, status, date_created) VALUES (@username, @password, 'Active', GETDATE())";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", finalPassword);
                 cmd.ExecuteNonQuery();
             }
+
             MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadUsers();
         }
 
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = checkBox1.Checked;
-            txtpassword.UseSystemPasswordChar = !isChecked;
-            txtnewpassword.UseSystemPasswordChar = !isChecked;
-            txtConfirmPass.UseSystemPasswordChar = !isChecked;
+            //bool isChecked = checkBox1.Checked;
+            //txtpassword.UseSystemPasswordChar = !isChecked;
+            //txtnewpassword.UseSystemPasswordChar = !isChecked;
+            //txtConfirmPass.UseSystemPasswordChar = !isChecked;
+        }
+
+        private void chnagePasswordUser_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

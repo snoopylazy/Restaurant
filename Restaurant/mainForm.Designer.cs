@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Close = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.Close);
@@ -67,12 +69,22 @@
             this.panel1.Size = new System.Drawing.Size(1323, 35);
             this.panel1.TabIndex = 11;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(1054, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 20);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "label3";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(265, 12);
+            this.label1.Location = new System.Drawing.Point(264, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 2;
@@ -131,26 +143,26 @@
             this.btnChangePassUser.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnChangePassUser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnChangePassUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePassUser.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnChangePassUser.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnChangePassUser.ForeColor = System.Drawing.Color.White;
-            this.btnChangePassUser.Location = new System.Drawing.Point(7, 403);
+            this.btnChangePassUser.Location = new System.Drawing.Point(8, 443);
             this.btnChangePassUser.Name = "btnChangePassUser";
-            this.btnChangePassUser.Size = new System.Drawing.Size(173, 40);
+            this.btnChangePassUser.Size = new System.Drawing.Size(173, 48);
             this.btnChangePassUser.TabIndex = 9;
-            this.btnChangePassUser.Text = "User profiles";
+            this.btnChangePassUser.Text = "គ្រប់គ្រងបុគ្គលិក";
             this.btnChangePassUser.UseVisualStyleBackColor = false;
             this.btnChangePassUser.Click += new System.EventHandler(this.btnChangePassUser_Click);
             // 
             // labeluser
             // 
             this.labeluser.AutoSize = true;
-            this.labeluser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeluser.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labeluser.ForeColor = System.Drawing.Color.White;
-            this.labeluser.Location = new System.Drawing.Point(12, 121);
+            this.labeluser.Location = new System.Drawing.Point(25, 118);
             this.labeluser.Name = "labeluser";
-            this.labeluser.Size = new System.Drawing.Size(134, 20);
+            this.labeluser.Size = new System.Drawing.Size(77, 24);
             this.labeluser.TabIndex = 8;
-            this.labeluser.Text = "Welcome, user";
+            this.labeluser.Text = "សូមស្វាគមន៍";
             this.labeluser.Click += new System.EventHandler(this.labeluser_Click);
             // 
             // btnLogout
@@ -161,13 +173,13 @@
             this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnLogout.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Location = new System.Drawing.Point(7, 636);
+            this.btnLogout.Location = new System.Drawing.Point(7, 630);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(173, 40);
+            this.btnLogout.Size = new System.Drawing.Size(173, 46);
             this.btnLogout.TabIndex = 7;
-            this.btnLogout.Text = "Logout";
+            this.btnLogout.Text = "ចាកចេញ";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
@@ -179,13 +191,13 @@
             this.btnCustomer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnCustomer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCustomer.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnCustomer.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnCustomer.Location = new System.Drawing.Point(7, 357);
+            this.btnCustomer.Location = new System.Drawing.Point(8, 389);
             this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(173, 40);
+            this.btnCustomer.Size = new System.Drawing.Size(173, 48);
             this.btnCustomer.TabIndex = 6;
-            this.btnCustomer.Text = "Customers";
+            this.btnCustomer.Text = "រាយការណ៍";
             this.btnCustomer.UseVisualStyleBackColor = false;
             this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
@@ -197,13 +209,13 @@
             this.btnCategory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnCategory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCategory.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnCategory.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnCategory.ForeColor = System.Drawing.Color.White;
-            this.btnCategory.Location = new System.Drawing.Point(7, 311);
+            this.btnCategory.Location = new System.Drawing.Point(8, 335);
             this.btnCategory.Name = "btnCategory";
-            this.btnCategory.Size = new System.Drawing.Size(173, 40);
+            this.btnCategory.Size = new System.Drawing.Size(173, 48);
             this.btnCategory.TabIndex = 5;
-            this.btnCategory.Text = "Categories";
+            this.btnCategory.Text = "ផ្នែកប្រភេទ";
             this.btnCategory.UseVisualStyleBackColor = false;
             this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
             // 
@@ -215,13 +227,13 @@
             this.btnInventory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnInventory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInventory.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnInventory.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnInventory.ForeColor = System.Drawing.Color.White;
-            this.btnInventory.Location = new System.Drawing.Point(7, 265);
+            this.btnInventory.Location = new System.Drawing.Point(8, 281);
             this.btnInventory.Name = "btnInventory";
-            this.btnInventory.Size = new System.Drawing.Size(173, 40);
+            this.btnInventory.Size = new System.Drawing.Size(173, 48);
             this.btnInventory.TabIndex = 4;
-            this.btnInventory.Text = "Inventories";
+            this.btnInventory.Text = "ផ្នែកទំនិញ";
             this.btnInventory.UseVisualStyleBackColor = false;
             this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
             // 
@@ -233,13 +245,13 @@
             this.btnShop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnShop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnShop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShop.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnShop.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnShop.ForeColor = System.Drawing.Color.White;
-            this.btnShop.Location = new System.Drawing.Point(7, 219);
+            this.btnShop.Location = new System.Drawing.Point(8, 227);
             this.btnShop.Name = "btnShop";
-            this.btnShop.Size = new System.Drawing.Size(173, 40);
+            this.btnShop.Size = new System.Drawing.Size(173, 48);
             this.btnShop.TabIndex = 3;
-            this.btnShop.Text = "POS";
+            this.btnShop.Text = "ផ្នែកលក់";
             this.btnShop.UseVisualStyleBackColor = false;
             this.btnShop.Click += new System.EventHandler(this.btnShop_Click);
             // 
@@ -251,19 +263,19 @@
             this.btnDashboard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDashboard.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDashboard.Font = new System.Drawing.Font("Khmer OS Battambang", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDashboard.ForeColor = System.Drawing.Color.White;
-            this.btnDashboard.Location = new System.Drawing.Point(7, 173);
+            this.btnDashboard.Location = new System.Drawing.Point(8, 173);
             this.btnDashboard.Name = "btnDashboard";
-            this.btnDashboard.Size = new System.Drawing.Size(173, 40);
+            this.btnDashboard.Size = new System.Drawing.Size(173, 48);
             this.btnDashboard.TabIndex = 2;
-            this.btnDashboard.Text = "Dashboard";
+            this.btnDashboard.Text = "របាយការណ៍";
             this.btnDashboard.UseVisualStyleBackColor = false;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Restaurant.Properties.Resources.Restaurant1;
+            this.pictureBox1.Image = global::Restaurant.Properties.Resources.Osja_Esports_2022;
             this.pictureBox1.Location = new System.Drawing.Point(51, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 80);
@@ -294,6 +306,7 @@
             // 
             // chnagePasswordUser1
             // 
+            this.chnagePasswordUser1.BackColor = System.Drawing.Color.White;
             this.chnagePasswordUser1.Location = new System.Drawing.Point(0, 0);
             this.chnagePasswordUser1.Name = "chnagePasswordUser1";
             this.chnagePasswordUser1.Size = new System.Drawing.Size(1135, 680);
@@ -372,5 +385,6 @@
         private System.Windows.Forms.Button btnChangePassUser;
         private dashboardForm dashboardForm1;
         private chnagePasswordUser chnagePasswordUser1;
+        private System.Windows.Forms.Label label3;
     }
 }

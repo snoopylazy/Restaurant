@@ -14,13 +14,18 @@ namespace Restaurant
     {
         private bool isAdmin;
         private string username;
+
+        private Timer timer;
         public mainForm(bool isAdmin, string username)
         {
             InitializeComponent();
             this.isAdmin = isAdmin;
             this.username = username;
 
-            labeluser.Text = "Welcome, " + username;
+            Datetime();
+            starttime();
+
+            labeluser.Text = "សូមស្វាគមន៍, " + username;
 
             InitializeFormVisibility();
         }
@@ -158,10 +163,20 @@ namespace Restaurant
         {
 
         }
-
-        //private void pictureBoxReload_Click(object sender, EventArgs e)
-        //{
-
-        //}
+        private void Datetime()
+        {
+            label3.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+        }
+        private void starttime()
+        {
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Datetime();
+        }
     }
 }

@@ -76,13 +76,13 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Sienna;
-            this.label4.Location = new System.Drawing.Point(65, 544);
+            this.label4.Location = new System.Drawing.Point(133, 544);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(263, 16);
+            this.label4.Size = new System.Drawing.Size(128, 24);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Already have an account? LogIn here";
+            this.label4.Text = "មានគណនី? ចុចទីនេះ";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // btnRegister
@@ -92,77 +92,78 @@
             this.btnRegister.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegister.Font = new System.Drawing.Font("Khmer OS Battambang", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegister.ForeColor = System.Drawing.Color.White;
             this.btnRegister.Location = new System.Drawing.Point(52, 499);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(295, 42);
             this.btnRegister.TabIndex = 18;
-            this.btnRegister.Text = "Register";
+            this.btnRegister.Text = "បង្កើតថ្មី";
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // showpass
             // 
             this.showpass.AutoSize = true;
+            this.showpass.Font = new System.Drawing.Font("Khmer OS Battambang", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showpass.ForeColor = System.Drawing.Color.Sienna;
             this.showpass.Location = new System.Drawing.Point(52, 451);
             this.showpass.Name = "showpass";
-            this.showpass.Size = new System.Drawing.Size(124, 20);
+            this.showpass.Size = new System.Drawing.Size(64, 26);
             this.showpass.TabIndex = 17;
-            this.showpass.Text = "Show password";
+            this.showpass.Text = "បង្ហាញ";
             this.showpass.UseVisualStyleBackColor = true;
             this.showpass.CheckedChanged += new System.EventHandler(this.showpass_CheckedChanged);
             // 
             // txtpassword
             // 
-            this.txtpassword.Font = new System.Drawing.Font("Snap ITC", 12F);
+            this.txtpassword.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F);
             this.txtpassword.Location = new System.Drawing.Point(52, 335);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '*';
-            this.txtpassword.Size = new System.Drawing.Size(295, 33);
+            this.txtpassword.Size = new System.Drawing.Size(295, 31);
             this.txtpassword.TabIndex = 16;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Sienna;
-            this.label3.Location = new System.Drawing.Point(50, 316);
+            this.label3.Location = new System.Drawing.Point(49, 308);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
+            this.label3.Size = new System.Drawing.Size(89, 24);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Password";
+            this.label3.Text = "លេខកូដសម្ងាត់";
             // 
             // txtusername
             // 
-            this.txtusername.Font = new System.Drawing.Font("Snap ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtusername.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtusername.Location = new System.Drawing.Point(52, 256);
             this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(295, 33);
+            this.txtusername.Size = new System.Drawing.Size(295, 31);
             this.txtusername.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Sienna;
-            this.label2.Location = new System.Drawing.Point(50, 237);
+            this.label2.Location = new System.Drawing.Point(49, 229);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 16);
+            this.label2.Size = new System.Drawing.Size(107, 24);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Username";
+            this.label2.Text = "ឈ្មោះអ្នកប្រើប្រាស់";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Snap ITC", 12F);
+            this.label1.Font = new System.Drawing.Font("Khmer OS Battambang", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Sienna;
-            this.label1.Location = new System.Drawing.Point(97, 184);
+            this.label1.Location = new System.Drawing.Point(140, 175);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 27);
+            this.label1.Size = new System.Drawing.Size(115, 31);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Hello newe user!!";
+            this.label1.Text = "បង្កើតគណនីថ្មី";
             // 
             // pictureBox1
             // 
@@ -176,23 +177,23 @@
             // 
             // txtconfirmpass
             // 
-            this.txtconfirmpass.Font = new System.Drawing.Font("Snap ITC", 12F);
+            this.txtconfirmpass.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F);
             this.txtconfirmpass.Location = new System.Drawing.Point(52, 411);
             this.txtconfirmpass.Name = "txtconfirmpass";
             this.txtconfirmpass.PasswordChar = '*';
-            this.txtconfirmpass.Size = new System.Drawing.Size(295, 33);
+            this.txtconfirmpass.Size = new System.Drawing.Size(295, 31);
             this.txtconfirmpass.TabIndex = 21;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Sienna;
-            this.label5.Location = new System.Drawing.Point(50, 392);
+            this.label5.Location = new System.Drawing.Point(51, 384);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 16);
+            this.label5.Size = new System.Drawing.Size(125, 24);
             this.label5.TabIndex = 20;
-            this.label5.Text = "Confirm Password";
+            this.label5.Text = "បញ្ជាក់លេខកូដសម្ងាត់";
             // 
             // signupForm
             // 

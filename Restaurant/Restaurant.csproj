@@ -221,6 +221,7 @@
     <Content Include="assets\Stack of Money.png" />
     <Content Include="assets\User.png" />
     <Content Include="assets\Users.png" />
+    <None Include="Resources\Osja_Esports_2022.png" />
     <None Include="Resources\lookup.gif" />
     <None Include="Resources\catgif.gif" />
     <None Include="Resources\pngtree-small-restaurant-building-vector-with-flat-design-png-image_2316583.jpg" />

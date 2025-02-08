@@ -62,37 +62,38 @@
             // productname
             // 
             this.productname.AutoSize = true;
-            this.productname.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productname.Location = new System.Drawing.Point(4, 201);
+            this.productname.Font = new System.Drawing.Font("Khmer OS Battambang", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productname.Location = new System.Drawing.Point(4, 200);
             this.productname.Name = "productname";
-            this.productname.Size = new System.Drawing.Size(116, 19);
+            this.productname.Size = new System.Drawing.Size(133, 27);
             this.productname.TabIndex = 1;
             this.productname.Text = "Product name";
             // 
             // price
             // 
             this.price.AutoSize = true;
-            this.price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.Location = new System.Drawing.Point(5, 223);
+            this.price.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F);
+            this.price.Location = new System.Drawing.Point(5, 221);
             this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(44, 18);
+            this.price.Size = new System.Drawing.Size(42, 24);
             this.price.TabIndex = 2;
             this.price.Text = "$0.00";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 243);
+            this.label3.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F);
+            this.label3.Location = new System.Drawing.Point(5, 241);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 16);
+            this.label3.Size = new System.Drawing.Size(44, 24);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Stocks : ";
+            this.label3.Text = "ស្តុក : ";
             // 
             // stock
             // 
             this.stock.AutoSize = true;
             this.stock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stock.Location = new System.Drawing.Point(68, 243);
+            this.stock.Location = new System.Drawing.Point(68, 242);
             this.stock.Name = "stock";
             this.stock.Size = new System.Drawing.Size(16, 18);
             this.stock.TabIndex = 4;
@@ -100,7 +101,7 @@
             // 
             // quantity
             // 
-            this.quantity.Location = new System.Drawing.Point(66, 267);
+            this.quantity.Location = new System.Drawing.Point(66, 265);
             this.quantity.Name = "quantity";
             this.quantity.Size = new System.Drawing.Size(64, 22);
             this.quantity.TabIndex = 5;
@@ -112,24 +113,25 @@
             this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("MingLiU_HKSCS-ExtB", 10.2F, System.Drawing.FontStyle.Bold);
+            this.btnAdd.Font = new System.Drawing.Font("Khmer OS Battambang", 9F, System.Drawing.FontStyle.Bold);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(182, 261);
+            this.btnAdd.Location = new System.Drawing.Point(178, 243);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(64, 29);
+            this.btnAdd.Size = new System.Drawing.Size(65, 45);
             this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "ទិញ";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 270);
+            this.label5.Font = new System.Drawing.Font("Khmer OS Battambang", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 265);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 16);
+            this.label5.Size = new System.Drawing.Size(45, 24);
             this.label5.TabIndex = 7;
-            this.label5.Text = "Quantity";
+            this.label5.Text = "ចំនួន :";
             // 
             // cardProducts
             // 
