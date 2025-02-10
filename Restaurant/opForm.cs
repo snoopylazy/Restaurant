@@ -131,7 +131,9 @@ namespace Restaurant
                 {
                     connect.Open();
 
-                    string selectData = "SELECT * FROM products WHERE productname LIKE @searchTerm OR productid LIKE @searchTerm OR stock LIKE @searchTerm";
+                    //string selectData = "SELECT * FROM products WHERE productname LIKE @searchTerm OR productid LIKE @searchTerm OR stock LIKE @searchTerm";
+                    string selectData = "SELECT * FROM products WHERE (productname LIKE @searchTerm OR productid LIKE @searchTerm OR stock LIKE @searchTerm) AND status <> 'unavailable'";
+
 
                     using (SqlCommand cmd = new SqlCommand(selectData, connect))
                     {
