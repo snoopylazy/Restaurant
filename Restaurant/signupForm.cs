@@ -47,7 +47,7 @@ namespace Restaurant
                 connect.Open();
                 string checkUsername = "SELECT * FROM users WHERE username = @usern";
 
-                using (SqlCommand checkUsern = new SqlCommand(checkUsername,connect))
+                using (SqlCommand checkUsern = new SqlCommand(checkUsername, connect))
                 {
                     checkUsern.Parameters.AddWithValue("@usern", txtusername.Text.Trim());
 
@@ -56,14 +56,15 @@ namespace Restaurant
 
                     adapter.Fill(table);
 
-                    if(table.Rows.Count != 0)
+                    if (table.Rows.Count != 0)
                     {
-                        MessageBox.Show($"{txtusername.Text.Trim()} was taken alreadt","Error Messages", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"{txtusername.Text.Trim()} was taken already", "Error Messages", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    else if(txtpassword.Text.Trim().Length < 8)
+                    else if (txtpassword.Text.Trim().Length < 8)
                     {
-                        MessageBox.Show("Invalid Password, at least 8 characters","Error Messages", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }else if(txtpassword.Text.Trim() != txtconfirmpass.Text.Trim())
+                        MessageBox.Show("Invalid Password, at least 8 characters", "Error Messages", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (txtpassword.Text.Trim() != txtconfirmpass.Text.Trim())
                     {
                         MessageBox.Show("Password does not match", "Error Messages", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -74,10 +75,9 @@ namespace Restaurant
                         {
                             cmd.Parameters.AddWithValue("@usern", txtusername.Text.Trim());
                             cmd.Parameters.AddWithValue("@pass", txtpassword.Text.Trim());
-                            cmd.Parameters.AddWithValue("@status", "Active");
+                            cmd.Parameters.AddWithValue("@status", "Unactive"); // Set status as "Unactive"
 
                             DateTime today = DateTime.Now;
-
                             cmd.Parameters.AddWithValue("@date", today);
 
                             cmd.ExecuteNonQuery();
@@ -91,15 +91,16 @@ namespace Restaurant
                 }
             }
         }
-
-        //private void txtconfirmpass_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    btnRegister.Focus();
-        //}
-
-        //private void signupForm_KeyDown(object sender, KeyEventArgs e)
-        //{
-
-        //}
     }
+
+    //private void txtconfirmpass_KeyDown(object sender, KeyEventArgs e)
+    //{
+    //    btnRegister.Focus();
+    //}
+
+    //private void signupForm_KeyDown(object sender, KeyEventArgs e)
+    //{
+
+    //}
 }
+

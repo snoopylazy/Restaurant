@@ -27,51 +27,9 @@ namespace Restaurant
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 selectedUsername = row.Cells["username"].Value.ToString();
                 textusername.Text = selectedUsername;
+                comboBox1.SelectedItem = row.Cells["status"].Value.ToString();
             }
         }
-
-        private void btnEnter_Click(object sender, EventArgs e)
-        {
-            string oldPassword = txtpassword.Text.Trim();
-            string newPassword = txtnewpassword.Text.Trim();
-            string confirmPassword = txtConfirmPass.Text.Trim();
-
-            if (string.IsNullOrEmpty(selectedUsername))
-            {
-                MessageBox.Show("Please select a user from the list!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
-            {
-                MessageBox.Show("All fields are required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (newPassword != confirmPassword)
-            {
-                MessageBox.Show("New passwords do not match!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!VerifyOldPassword(selectedUsername, oldPassword))
-            {
-                MessageBox.Show("Old password is incorrect!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // If the checkbox is checked, hash the password; otherwise, store it as plain text
-            string finalPassword = checkBox1.Checked ? HashPassword(newPassword) : newPassword;
-
-            UpdatePassword(selectedUsername, finalPassword);
-
-            MessageBox.Show("Password changed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            txtpassword.Clear();
-            txtnewpassword.Clear();
-            txtConfirmPass.Clear();
-        }
-
         private bool VerifyOldPassword(string username, string enteredPassword)
         {
             using (SqlConnection conn = new SqlConnection(connection))
@@ -189,10 +147,11 @@ namespace Restaurant
         {
             string username = textusername.Text.Trim();
             string password = txtnewpassword.Text.Trim();
+            string status = comboBox1.SelectedItem?.ToString(); // Get status from comboBox1
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(status))
             {
-                MessageBox.Show("Username and password are required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username, password, and status are required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -200,7 +159,7 @@ namespace Restaurant
             {
                 conn.Open();
 
-                // Check if the username already exists
+                // Check if username exists
                 string checkQuery = "SELECT COUNT(*) FROM users WHERE username = @username";
                 SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
                 checkCmd.Parameters.AddWithValue("@username", username);
@@ -212,18 +171,20 @@ namespace Restaurant
                     return;
                 }
 
-                // Insert the new user
+                // Insert the new user with status
                 string finalPassword = checkBox1.Checked ? HashPassword(password) : password;
-                string query = "INSERT INTO users (username, password, status, date_created) VALUES (@username, @password, 'Active', GETDATE())";
+                string query = "INSERT INTO users (username, password, status, date_created) VALUES (@username, @password, @status, GETDATE())";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", finalPassword);
+                cmd.Parameters.AddWithValue("@status", status);
                 cmd.ExecuteNonQuery();
             }
 
             MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadUsers();
         }
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -236,6 +197,128 @@ namespace Restaurant
         private void chnagePasswordUser_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtnewpassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtConfirmPass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateUser(string oldUsername, string newUsername, string newPassword, string newStatus)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                conn.Open();
+
+                // Check if the new username already exists (if changed)
+                if (oldUsername != newUsername)
+                {
+                    string checkQuery = "SELECT COUNT(*) FROM users WHERE username = @newUsername";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@newUsername", newUsername);
+                    int userExists = (int)checkCmd.ExecuteScalar();
+
+                    if (userExists > 0)
+                    {
+                        MessageBox.Show("This username is already taken. Please choose another one!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // Update user details
+                string query = "UPDATE users SET username=@newUsername, status=@status";
+                if (newPassword != null) query += ", password=@newPassword";
+                query += " WHERE username=@oldUsername";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@newUsername", newUsername);
+                cmd.Parameters.AddWithValue("@status", newStatus);
+                cmd.Parameters.AddWithValue("@oldUsername", oldUsername);
+                if (newPassword != null) cmd.Parameters.AddWithValue("@newPassword", newPassword);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void btnupdate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectedUsername))
+            {
+                MessageBox.Show("Please select a user from the list!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string newUsername = textusername.Text.Trim();
+            string newPassword = txtnewpassword.Text.Trim();
+            string status = comboBox1.SelectedItem?.ToString();
+
+            // Ensure none of the fields are empty
+            if (string.IsNullOrEmpty(newUsername) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(newPassword))
+            {
+                MessageBox.Show("Username, password, and status are required!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Ensure password has at least 8 characters
+            if (newPassword.Length < 8)
+            {
+                MessageBox.Show("Password must be at least 8 characters long!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Hash password if necessary
+            string finalPassword = checkBox1.Checked ? HashPassword(newPassword) : newPassword;
+
+            // Update user details with password and other fields
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                conn.Open();
+
+                // If username is changed, check if the new username already exists
+                if (selectedUsername != newUsername)
+                {
+                    string checkQuery = "SELECT COUNT(*) FROM users WHERE username = @newUsername";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@newUsername", newUsername);
+                    int userExists = (int)checkCmd.ExecuteScalar();
+
+                    if (userExists > 0)
+                    {
+                        MessageBox.Show("This username is already taken. Please choose another one!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // Prepare the update query
+                string query = "UPDATE users SET username=@newUsername, status=@status";
+                if (newPassword != null) // Only update password if it's changed
+                {
+                    query += ", password=@newPassword";
+                }
+                query += " WHERE username=@oldUsername";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@newUsername", newUsername);
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@oldUsername", selectedUsername);
+
+                if (newPassword != null)
+                {
+                    cmd.Parameters.AddWithValue("@newPassword", finalPassword);
+                }
+
+                cmd.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("User updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Refresh the user list
+            LoadUsers();
         }
     }
 }

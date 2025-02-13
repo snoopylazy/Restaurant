@@ -131,9 +131,7 @@ namespace Restaurant
                 {
                     connect.Open();
 
-                    //string selectData = "SELECT * FROM products WHERE productname LIKE @searchTerm OR productid LIKE @searchTerm OR stock LIKE @searchTerm";
-                    string selectData = "SELECT * FROM products WHERE (productname LIKE @searchTerm OR productid LIKE @searchTerm OR stock LIKE @searchTerm) AND status <> 'unavailable'";
-
+                    string selectData = "SELECT * FROM products WHERE (productname LIKE @searchTerm OR productid LIKE @searchTerm) AND stock > 0 AND status <> 'unavailable'";
 
                     using (SqlCommand cmd = new SqlCommand(selectData, connect))
                     {
@@ -179,7 +177,7 @@ namespace Restaurant
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -74,7 +74,7 @@ namespace Restaurant
             using (SqlConnection connect = new SqlConnection(connection))
             {
                 connect.Open();
-                string query = "SELECT * FROM users WHERE username = @usern AND password = @pass";
+                string query = "SELECT username, status FROM users WHERE username = @usern AND password = @pass";
                 using (SqlCommand cmd = new SqlCommand(query, connect))
                 {
                     cmd.Parameters.AddWithValue("@usern", txtusername.Text.Trim());
@@ -82,15 +82,21 @@ namespace Restaurant
 
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     DataTable table = new DataTable();
-
                     adapter.Fill(table);
 
                     if (table.Rows.Count > 0)
                     {
-                        // Get username from the database
                         string username = table.Rows[0]["username"].ToString();
+                        string status = table.Rows[0]["status"].ToString();
 
-                        // **Store username in UserSession**
+                        // Check if the user is "unactive"
+                        if (status.ToLower() == "unactive")
+                        {
+                            MessageBox.Show("Your account is inactive. Please contact the administrator.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Store username in UserSession
                         UserSession.LoggedInUser = username;
 
                         // Check if user is admin
@@ -103,12 +109,11 @@ namespace Restaurant
                     }
                     else
                     {
-                        MessageBox.Show("Login Failed", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Login Failed. Invalid username or password.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
         }
-
 
         //private void btnLogin(object sender, EventArgs e)
         //{

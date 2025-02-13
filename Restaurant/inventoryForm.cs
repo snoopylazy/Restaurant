@@ -50,87 +50,114 @@ namespace Restaurant
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (txtproID.Text == "" || txtproName.Text == "" || comboCategory.SelectedIndex == -1 || txtstock.Text == "" || txtprice.Text == "" || comboStatus.Text == "" || pictureBox1.Image == null)
+            if (txtproID.Text == "" || txtproName.Text == "" || comboCategory.SelectedIndex == -1 ||
+                txtstock.Text == "" || txtprice.Text == "" || comboStatus.Text == "" || pictureBox1.Image == null)
             {
-
                 MessageBox.Show("Please fill all fields", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+
+            using (SqlConnection connect = new SqlConnection(connection))
             {
-                using (SqlConnection connect = new SqlConnection(connection))
+                connect.Open();
+
+                string checkProductID = "SELECT * FROM products WHERE productid = @proid";
+                using (SqlCommand checkProID = new SqlCommand(checkProductID, connect))
                 {
-                    connect.Open();
+                    checkProID.Parameters.AddWithValue("@proid", txtproID.Text.Trim());
+                    SqlDataAdapter adapter = new SqlDataAdapter(checkProID);
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
 
-                    string checkProductID = "SELECT * FROM products WHERE productid = @proid";
-                    using (SqlCommand checkProID = new SqlCommand(checkProductID, connect))
+                    if (table.Rows.Count != 0)
                     {
-                        checkProID.Parameters.AddWithValue("@proid", txtproID.Text.Trim());
-                        SqlDataAdapter adapter = new SqlDataAdapter(checkProID);
-                        DataTable table = new DataTable();
-                        adapter.Fill(table);
+                        MessageBox.Show($"{txtproID.Text.Trim()} already exists.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                        if (table.Rows.Count != 0)
-                        {
-                            MessageBox.Show($"{txtproID.Text.Trim()} is already exists.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                    // Define storage path
+                    string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                    string imageDirectory = Path.Combine(baseDirectory, "products_directory");
+                    string imagePath = Path.Combine(imageDirectory, txtproID.Text.Trim() + ".jpg");
 
-                            string insertData = "INSERT INTO products (productid, productname, category, stock, price, status, image, date_insert)" + " VALUES(@productid, @productname, @category, @stock, @price, @status, @image, @date)";
-                            string relativePath = Path.Combine("products_directory", txtproID.Text.Trim() + ".jpg");
-                            string path = Path.Combine(baseDirectory, relativePath);
-                            string directoryPath = Path.GetDirectoryName(path);
+                    // Ensure directory exists
+                    if (!Directory.Exists(imageDirectory))
+                    {
+                        Directory.CreateDirectory(imageDirectory);
+                    }
 
-                            if (!Directory.Exists(directoryPath))
-                            {
-                                Directory.CreateDirectory(directoryPath);
-                            }
-                            File.Copy(pictureBox1.ImageLocation, path, true);
+                    // Save image
+                    if (!string.IsNullOrEmpty(pictureBox1.ImageLocation))
+                    {
+                        File.Copy(pictureBox1.ImageLocation, imagePath, true);
+                    }
+                    else
+                    {
+                        pictureBox1.Image.Save(imagePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
 
-                            using (SqlCommand cmd = new SqlCommand(insertData, connect))
-                            {
-                                cmd.Parameters.AddWithValue("@productid", txtproID.Text.Trim());
-                                cmd.Parameters.AddWithValue("@productname", txtproName.Text.Trim());
-                                cmd.Parameters.AddWithValue("@category", comboCategory.Text.ToString());
-                                cmd.Parameters.AddWithValue("@stock", txtstock.Text.Trim());
-                                cmd.Parameters.AddWithValue("@price", txtprice.Text.Trim());
-                                cmd.Parameters.AddWithValue("@status", comboStatus.SelectedItem.ToString());
-                                cmd.Parameters.AddWithValue("@image", path);
+                    // Insert data into database
+                    string insertData = "INSERT INTO products (productid, productname, category, stock, price, status, image, date_insert) " +
+                                        "VALUES(@productid, @productname, @category, @stock, @price, @status, @image, @date)";
 
-                                DateTime today = DateTime.Now;
-                                cmd.Parameters.AddWithValue("@date", today);
+                    using (SqlCommand cmd = new SqlCommand(insertData, connect))
+                    {
+                        cmd.Parameters.AddWithValue("@productid", txtproID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@productname", txtproName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@category", comboCategory.Text.ToString());
+                        cmd.Parameters.AddWithValue("@stock", txtstock.Text.Trim());
+                        cmd.Parameters.AddWithValue("@price", txtprice.Text.Trim());
+                        cmd.Parameters.AddWithValue("@status", comboStatus.SelectedItem.ToString());
+                        cmd.Parameters.AddWithValue("@image", imagePath);
+                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
 
-                                cmd.ExecuteNonQuery();
-                                MessageBox.Show("Product Added Successfully", "Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                clearField();
-                            }
-                        }
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Product Added Successfully", "Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        clearField();
                     }
                 }
             }
             displayProducts();
         }
 
+        //private void btnImport_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        OpenFileDialog dialog = new OpenFileDialog();
+        //        dialog.Filter = "Image Files (*.jpg, *.png| *.jpg; *.png)";
+
+        //        string imagePath = "";
+        //        if (dialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            imagePath = dialog.FileName;
+        //            pictureBox1.ImageLocation = imagePath;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Error: {e}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
         private void btnImport_Click(object sender, EventArgs e)
         {
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "Image Files (*.jpg, *.png| *.jpg; *.png)";
+                dialog.Filter = "Image Files (*.jpg, *.png)|*.jpg;*.png";
 
-                string imagePath = "";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    imagePath = dialog.FileName;
-                    pictureBox1.ImageLocation = imagePath;
+                    pictureBox1.ImageLocation = dialog.FileName; // Store image path
+                    pictureBox1.Image = Image.FromFile(dialog.FileName); // Display image
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {e}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         void clearField()
         {
@@ -208,7 +235,7 @@ namespace Restaurant
 
                             if (table.Rows.Count >= 2)
                             {
-                                MessageBox.Show(txtproID.Text.Trim() + " is already exists.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(txtproID.Text.Trim() + " already exists.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             else
                             {
@@ -218,10 +245,16 @@ namespace Restaurant
                                 {
                                     cmd.Parameters.AddWithValue("@productid", txtproID.Text.Trim());
                                     cmd.Parameters.AddWithValue("@productname", txtproName.Text.Trim());
-                                    cmd.Parameters.AddWithValue("@category", comboCategory.SelectedItem.ToString());
+
+                                    // Check if SelectedItem is null
+                                    string category = comboCategory.SelectedItem != null ? comboCategory.SelectedItem.ToString() : "";
+                                    cmd.Parameters.AddWithValue("@category", category);
+
                                     cmd.Parameters.AddWithValue("@stock", txtstock.Text.Trim());
                                     cmd.Parameters.AddWithValue("@price", txtprice.Text.Trim());
-                                    cmd.Parameters.AddWithValue("@status", comboStatus.SelectedItem.ToString());
+
+                                    string status = comboStatus.SelectedItem != null ? comboStatus.SelectedItem.ToString() : "";
+                                    cmd.Parameters.AddWithValue("@status", status);
 
                                     DateTime today = DateTime.Now;
                                     cmd.Parameters.AddWithValue("@date", today);
@@ -238,6 +271,7 @@ namespace Restaurant
             }
             displayProducts();
         }
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -276,7 +310,8 @@ namespace Restaurant
         private void loadProduct()
         {
             // Fetch the category and display them in the DataGridView
-            displayCategories();
+            displayCategories(); // Reload categories
+            displayProducts();   // Reload products
         }
         private void textSearch_TextChanged(object sender, EventArgs e)
         {
